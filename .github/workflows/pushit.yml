@@ -3,7 +3,7 @@ name: sdk4bots
 on: workflow_dispatch
 
 env:
-  IMAGE: ghcr.io/BilliBoleMeow/sdk4bots
+  IMAGE: ghcr.io/billibolemeow/sdk4bots
 
 jobs:
   push:
