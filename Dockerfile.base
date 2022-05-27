@@ -1,0 +1,25 @@
+FROM ubuntu:20.04
+WORKDIR /
+ENV MEGA_SDK_VERSION '3.12.1'
+RUN apt-get -qq update && apt-get -y upgrade && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable && \
+    apt-get install -y python3-pip python3-lxml aria2 qbittorrent-nox tzdata p7zip-full p7zip-rar xz-utils curl pv jq locales neofetch git g++ gcc autoconf automake unzip \
+    m4 libtool qt5-default make libcurl4-openssl-dev libncurses5-dev libboost-all-dev libpthread-stubs0-dev libpq-dev libffi-dev \
+    libcrypto++-dev libsqlite3-dev libc-ares-dev libreadline-dev libpcre3 libpcre3-dev libuv1-dev libraw-dev ffmpeg libomp-dev zlib1g-dev libzen-dev \
+    libsodium-dev libnautilus-extension-dev libavutil-dev libavcodec-dev libavformat-dev libjpeg-dev libexif-dev libid3tag0-dev libogg-dev libvorbis-dev libflac-dev libswscale-dev libsqlite3-dev libreadline-dev libfuse-dev \
+    libssl-dev libfreeimage-dev swig doxygen apt-utils && \
+    pip3 install anytree appdirs aria2p attrdict beautifulsoup4 bencoding cfscrape feedparser flask google-api-python-client google-auth-httplib2 google-auth-oauthlib gunicorn lk21 lxml \
+    pillow psutil psycopg2-binary pybase64 pyrogram python-dotenv python-magic python-telegram-bot qbittorrent-api requests six telegraph tenacity tgCrypto urllib3 yt-dlp && \
+    git clone https://github.com/meganz/sdk.git sdk && cd sdk &&\
+    git checkout v$MEGA_SDK_VERSION && ./autogen.sh && \
+    ./configure --disable-silent-rules --enable-python --disable-examples --with-python3 --with-sodium --with-freeimage --with-pcre --with-libuv --with-ffmpeg --with-libraw --with-cryptopp --with-zlib --with-sqlite --with-libzen --with-poll --with-openssl --with-cares --with-curl --with-termcap --with-readline --with-fuse && \
+    make -j$(nproc --all) && cd bindings/python/ && \
+    python3 setup.py bdist_wheel && cd dist/ && \
+    pip3 install --no-cache-dir megasdk-*.whl && \
+    apt-get -qq update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get -qq update && \
+    apt-get -qq install -y p7zip-full p7zip-rar wget unzip curl pv jq ffmpeg locales python3-lxml && \
+    apt-get purge -y software-properties-common
