@@ -9,8 +9,8 @@ RUN apt-get -qq update && apt-get -y upgrade && \
     libcrypto++-dev libsqlite3-dev libc-ares-dev libreadline-dev libpcre3 libpcre3-dev libuv1-dev libraw-dev ffmpeg libomp-dev zlib1g-dev libzen-dev \
     libsodium-dev libnautilus-extension-dev libavutil-dev libavcodec-dev libavformat-dev libjpeg-dev libexif-dev libid3tag0-dev libogg-dev libvorbis-dev libflac-dev libswscale-dev libsqlite3-dev libreadline-dev libfuse-dev \
     libssl-dev libfreeimage-dev swig doxygen apt-utils && \
-    pip3 install anytree appdirs aria2p attrdict beautifulsoup4 bencoding cfscrape feedparser flask google-api-python-client google-auth-httplib2 google-auth-oauthlib gunicorn lk21 lxml \
-    pillow psutil psycopg2-binary pybase64 pyrogram python-dotenv python-magic python-telegram-bot qbittorrent-api requests six telegraph tenacity tgCrypto urllib3 yt-dlp && \
+    pip3 install anytree appdirs aria2p asyncio attrdict beautifulsoup4 bencoding cfscrape feedparser flask google-api-python-client google-auth-httplib2 google-auth-oauthlib gunicorn lk21 lxml \
+    pillow psutil psycopg2-binary pybase64 pyrogram python-dotenv python-magic python-telegram-bot qbittorrent-api requests telegraph tenacity tgCrypto urllib3 yt-dlp && \
     git clone https://github.com/meganz/sdk.git sdk && cd sdk &&\
     git checkout v$MEGA_SDK_VERSION && ./autogen.sh && \
     ./configure --disable-silent-rules --enable-python --disable-examples --with-python3 --with-sodium --with-freeimage --with-pcre --with-libuv --with-ffmpeg --with-libraw --with-cryptopp --with-zlib --with-sqlite --with-libzen --with-poll --with-openssl --with-cares --with-curl --with-termcap --with-readline --with-fuse && \
